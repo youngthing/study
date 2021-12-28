@@ -11,12 +11,12 @@
 	<table border=1 align=center>
 
 		<tr>
-			<th colspan=3>Message List
+			<th colspan=3>Message List (${count})
 		</tr>
 		<tr>
 			<th>
 			<th>Writer
-			<th>Messgae
+			<th>Message
 		</tr>
 		<c:forEach var="i" items="${list }">
 			<tr>
@@ -26,9 +26,16 @@
 			</tr>
 		</c:forEach>
 		<tr>
+			<form action="search">
+			<td colspan=3><input type=text placeholer="Target seq to search" name="searchSeq">
+				<button>Search</button>
+			</form>
+		</tr>
+		<tr>
 			<td colspan=3>
 				<form action="deleteProc" method="get">
-					<input type=text placeholder="Target Number to delete" name=delTarget>
+					<input type=text placeholder="Target Number to delete"
+						name=delTarget>
 					<button>Delete</button>
 				</form>
 		</tr>
@@ -36,9 +43,9 @@
 			<td colspan=3>
 				<form action="updateProc" method="post">
 					<input type=text placeholder="Target Seq to update" name="seq"><br>
-					<input type=text placeholder="Target Writer to update" name="writer">
-					<br> <input type=text placeholder="Target Messate to update"
-						name="message">
+					<input type=text placeholder="Target Writer to update"
+						name="writer"> <br> <input type=text
+						placeholder="Target Messate to update" name="message">
 					<button>Update</button>
 				</form>
 		</tr>

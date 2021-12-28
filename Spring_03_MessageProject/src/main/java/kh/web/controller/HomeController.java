@@ -37,7 +37,9 @@ public class HomeController {
 	@RequestMapping("outputView")
 	public String outputView(Model model) throws Exception{
 		  List <MessageDTO> list = dao.selectAll();
+		  int count = dao.selectCount();
 		  model.addAttribute("list", list);
+		  model.addAttribute("count",count);
 		  return "output";
 	}
 	
@@ -51,6 +53,14 @@ public class HomeController {
 	public String updateProc(MessageDTO dto) throws Exception{
 		 int result = dao.update(dto);
 		 return "redirect:outputView";
+	}
+	
+	@RequestMapping("search")
+	public String search(int searchSeq,Model model) throws Exception{
+		List<MessageDTO> list = dao.search(searchSeq);
+		int count = dao.selectCount();
+		model.addAttribute("list",list);
+		return "output";
 	}
 	
 	@ExceptionHandler(Exception.class)

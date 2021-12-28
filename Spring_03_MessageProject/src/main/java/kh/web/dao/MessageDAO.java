@@ -16,24 +16,34 @@ public class MessageDAO {
 
 	@Autowired
 	private JdbcTemplate jdbc;
-	
+
 	public int insert(MessageDTO dto) throws Exception {
 		String sql = "insert into messages values(messages_seq.nextval,?,?,default)";
-		 return jdbc.update(sql, dto.getMessage(), dto.getWriter());
+		return jdbc.update(sql, dto.getMessage(), dto.getWriter());
 	}
-	
-	public List<MessageDTO> selectAll() throws Exception { 
+
+	public List<MessageDTO> selectAll() throws Exception {
+
 		String sql = "select * from messages order by 1";
-		jdbc.query(sql, new RowMapper() {
+		return jdbc.query(sql, new RowMapper<MessageDTO>() {
 			@Override
-			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return null;
+			public MessageDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				MessageDTO dto = new MessageDTO();
+				dto.setSeq(rs.getInt("seq"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setMessage(rs.getString("message"));
+				dto.setWrite_date(rs.getTimestamp("write_date"));
+				return dto;
+
 			}
-		});
-		
-		//jdbc.query : List 데이터를 가져올 때 사용
-		//jdbc.queryForObject : 한개의 데이터를 가져올 때 사용한다.
-		
+		}
+
+		);
+
+		// jdbc.query : List 데이터를 가져올 때 사용
+		// jdbc.queryForObject : 한개의 데이터를 가져올 때 사용한다.
+
 	}
 
 //	public int insert(MessageDTO dto) throws Exception {

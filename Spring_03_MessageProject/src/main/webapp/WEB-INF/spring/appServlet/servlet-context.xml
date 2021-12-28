@@ -13,7 +13,12 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<!-- resources 태그 : 디스패쳐로 가지 않고 다이렉트 경로로 가도록 함. 이미지jpg같은경우 다 맵핑으로 만들 수 없으니,,-->
+	<resources mapping="/images/**" location="/resources/images/" />
+	<!-- mapping 처럼 생겼다면~~ 로케이션으로가라 -->
+	<resources mapping="/css/**" location="/resources/css/" />
+	<!-- css 로 시작하면 리소시트 css 폴더가서 찾아라. -->
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -21,6 +26,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!--  anotaiont new 해주는 ㅇㅐ -->
 	<context:component-scan base-package="kh.web" />
 	
 	

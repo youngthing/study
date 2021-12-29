@@ -34,7 +34,8 @@ public class MessageDAO {
 
 	public int selectCount() throws Exception {
 		String sql = "select count(*) from messages";
-		return jdbc.queryForObject(sql, Integer.class); // 뒤에 내가 받아올 데이터의 타입을 적는다.
+		return jdbc.queryForObject(sql, Integer.class); 
+		// 뒤에 내가 받아올 데이터의 타입을 적는다.
 	}
 	
 // 마이페이지 or 내 정보 보기 회원 정보 수정 같은 경우 사용하기 ! 

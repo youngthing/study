@@ -13,16 +13,33 @@
 
 	<c:choose>
 		<c:when test="${loginID != null }">
-			
+
 			<table align=center>
-			<tr>
-				<th colspan=2>${loginID}님 환영합니다. 
-			</tr>
-			<tr aling=center>
-				<td><a href="/member/logout">로그아웃</a>
-				<td><a href="/member/leave">회원탈퇴</a>
-			</tr>
+				<tr>
+					<th colspan=2>${loginID}님환영합니다.
+				</tr>
+				<tr aling=center>
+					<td>
+						<button id="toBoard">게시판</button>
+					<td>
+						<button id="myPage">마이페이지</button>
+					<td>
+						<button id="logout">로그아웃</button>
+					<td>
+						<button id="leave">회원탈퇴</button>
+				</tr>
 			</table>
+			<script>
+				$("#logout").on("click", function() {
+						location.href = "/member/logout";
+				})
+				
+				$("#leave").on("click", function() {
+					if (confirm("정말 탈퇴하시겠습니까?")) {
+						location.href = "/member/leave";
+					}
+				})
+			</script>
 		</c:when>
 		<c:otherwise>
 			<form action="/member/login" method="post">

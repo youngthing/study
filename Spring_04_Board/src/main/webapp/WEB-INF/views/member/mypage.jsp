@@ -15,36 +15,13 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	<script>
-		$(function(){
-			$("#id").on("blur",function(){
-				$.ajax({
-					url:"/member/idDuplCheck",
-					data:{
-						id: $("#id").val()
-						}
-				}).done(function(resp){
-					if(resp == "1"){
-						$("#checkResult").css("color","pink");
-						$("#checkResult").text($("#id").val() + "는 이미 사용중인 id 입니다");
-						$("#id").val("");
-						$("#id").focus();
-					}else{
-						$("#checkResult").css("color","dodgerblue");
-						$("#checkResult").text("사용 가능한 ID입니다.");
-					}
-				});
-			});
-		})
-	
-	</script>
 </head>
 <body>
-	<div class=container style="width: 750px;">
-		<form class="row g-3" action="/member/signup">
+<div class=container style="width: 750px;">
+		<form class="row g-3" action="modify">
 			<div class="col-12">
 				<label for="inputEmail4" class="form-label">아이디</label>
-				<input type="id" class="form-control" id="id" name="id">
+				<input type="id" class="form-control" id="id" name="id" value="${dto.id } " readonly="readonly"> 가입일 : ${dto.signup_date}
 				<span id=checkResult></span>
 			</div>
 			<div class="col-md-6">
@@ -57,45 +34,31 @@
 			</div>
 			<div class="col-md-6">
 				<label for="inputName" class="form-label">이름</label>
-				<input type="text" class="form-control" id="name" name="name">
+				<input type="text" class="form-control" id="name" name="name" value="${dto.name }">
 			</div>
 			<div class="col-12">
 				<label for="inputNumber" class="form-label">전화번호</label>
-				<input type="text" class="form-control" id="phone" name="phone"> 
+			<input type="text" class="form-control" id="phone" name="phone" value="${dto.phone }">
 			</div>
 			<div class="col-12">
 				<label for="inputAddress" class="form-label">우편번호</label>
 				<input type="text" class="form-control" id="zipcode" name="zipcode"
-					placeholder="주소">
+					placeholder="주소" value="${dto.zipcode }">
 				<input type="button" id="search" value="찾기">
 			</div>
 			<div class="col-12">
 				<label for="inputAddress" class="form-label">주소 1</label>
-				<input type="text" class="form-control" id="address" name="address1">
+				<input type="text" class="form-control" id="address" name="address1" value="${dto.address1 }">
 			</div>
 			<div class="col-12">
 				<label for="inputAddress" class="form-label">주소 2</label>
-				<input type="text" class="form-control" id="address2" name="address2">
+				<input type="text" class="form-control" id="address2" name="address2" value="${dto.address2 }">
 			</div>
 			<div class="col-12">
-				<input type="submit" class="btn btn-primary">
+				<input type="submit" class="btn btn-primary" value="수정">
 			</div>
 		</form>
 	</div>
-
-	<script>
-		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-		document.getElementById("search").onclick = function() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							document.getElementById('zipcode').value = data.zonecode;
-							document.getElementById("address").value = data.roadAddress;
-						}
-					}).open();
-		}
-	</script>
-
 
 </body>
 </html>

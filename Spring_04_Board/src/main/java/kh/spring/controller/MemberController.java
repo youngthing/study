@@ -1,9 +1,12 @@
 package kh.spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,10 +57,24 @@ public class MemberController {
 		return "redirect:/";	
 	}
 	
+	@RequestMapping("myPage")
+	public String myPage(Model model)throws Exception{
+		String id = (String)session.getAttribute("loginID");
+		MemberDTO dto = dao.selectAll(id);
+		model.addAttribute("dto",dto);
+		return "member/mypage";
+	}
+	
+	@RequestMapping("modify")
+	public String modify(String id) throws Exception{
+		int result = dao.modify(id);
+		return "redirect:/";
+	}
+	
 	@RequestMapping("logout")
 	public String logout() throws Exception{
 		 session.invalidate();
-	        return "home";
+	        return "redirect:/";
 	}
 	
 	@RequestMapping("leave")
@@ -65,7 +82,7 @@ public class MemberController {
 		String id = (String)session.getAttribute("loginID");
 		int result = dao.leave(id);
 		session.invalidate(); // 세션 초기화
-		return "home";
+		return "redirect:/";
 	}
 	
 	@ExceptionHandler(Exception.class)

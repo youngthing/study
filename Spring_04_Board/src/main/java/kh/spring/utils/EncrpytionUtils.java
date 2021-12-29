@@ -1,4 +1,4 @@
-package kh.spring.utils;
+package kh.web.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

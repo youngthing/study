@@ -1,4 +1,4 @@
-package kh.spring.controller;
+package kh.spring.web;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -22,9 +22,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("signupForm")
-	public String signupForm() {
-		return "signupForm";
-	}
+	
 	
 }

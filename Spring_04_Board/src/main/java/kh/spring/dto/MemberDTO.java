@@ -17,7 +17,6 @@ public class MemberDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
 	public String getPw() {
 		return pw;
 	}
